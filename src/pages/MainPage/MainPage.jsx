@@ -1,9 +1,13 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { Container, TextField, Box, Grid } from '@mui/material';
+import { LoadingButton } from '@mui/lab';
+
+import SendIcon from '@mui/icons-material/Send';
+
 
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
-import { TextField } from '@mui/material';
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -21,14 +25,41 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
+const analytics = getAnalytics(app); //eslint-disable-line
+
 
 export default function MainPage() {
+
+  const [loading, setLoading] = useState(false)  //eslint-disable-line
+
+  const handleClick = () => {
+
+  }
+
   return (
-    <main>
-      <TextField id="outlined-basic" label="Outlined" variant="outlined" />
-      <TextField id="outlined-basic" label="Outlined" variant="outlined" />
-      <TextField id="outlined-basic" label="Outlined" variant="outlined" />
-    </main>
+      <Container fixed>
+        <Box mt={4} mb={4}>
+          <Grid container spacing={2}>
+            <Grid item xs={4}>
+              <TextField id="outlined-basic" label="Outlined" variant="outlined" fullWidth/>
+            </Grid>
+            <Grid item xs={4}>
+              <TextField id="outlined-basic" label="Outlined" variant="outlined" fullWidth/>
+            </Grid>
+            <Grid item xs={4}>
+              <TextField id="outlined-basic" label="Outlined" variant="outlined" fullWidth/>
+            </Grid>
+          </Grid>
+        </Box>
+        <LoadingButton
+          onClick={handleClick}
+          endIcon={<SendIcon />}
+          loading={loading}
+          loadingPosition="end"
+          variant="contained"
+        >
+          Send
+        </LoadingButton>
+      </Container>
   )
 }
